@@ -13,17 +13,21 @@ import { User } from '../interfaces/user.interface';
 })
 export class UserService {
   users: User[] = [];
-
   unsubUsers;
 
   firestore: Firestore = inject(Firestore);
 
   constructor() {
     this.unsubUsers = this.subUserList();
-    console.log('All USERS:' + this.users);
+    
+    /* if (this.users.length === 0) {
+      console.log('All USERS EMPTY:');
+    } else {
+      console.log('All USERS:' + JSON.stringify(this.users));
+    } */
   }
 
-  ngonDestroy(){
+  ngonDestroy() {
     this.unsubUsers();
   }
 
@@ -31,17 +35,14 @@ export class UserService {
     return onSnapshot(this.getUsersRef(), (list) => {
       this.users = [];
       list.forEach((user) => {
-        this.users.push(this.setUserObject(user.data()));
+        this.users.push(this.setUserObject(user.data(), user.id));
       });
     });
   }
 
-  async addUser(user: {}) {
-    await addDoc(this.getUsersRef(), user);
-  }
-
-  setUserObject(obj: any) {
+  setUserObject(obj: any, id: string): User {
     return {
+      id: id || '',
       firstName: obj.firstName,
       lastName: obj.lastName,
       birthdate: obj.birthdate,
@@ -57,5 +58,12 @@ export class UserService {
 
   getSingleUserRef(colId: string, docId: string) {
     return doc(collection(this.firestore, colId), docId);
+  }
+
+  /* =================
+FUNCTION TO USE 
+==================*/
+  async addUser(user: {}) {
+    await addDoc(this.getUsersRef(), user);
   }
 }

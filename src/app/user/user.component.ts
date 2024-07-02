@@ -4,21 +4,24 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
-import { User } from '../interfaces/user.interface';
+import { MatCardModule } from '@angular/material/card';
+import { UserService } from '../firebase-services/user.service';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, MatTooltipModule],
+  imports: [MatIconModule, MatButtonModule, MatTooltipModule, MatCardModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
 })
 export class UserComponent {
- /*  user: User = new User(); */
-
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private userService: UserService) {}
 
   openDialog() {
     this.dialog.open(DialogAddUserComponent);
+  }
+
+  getUsers() {
+    return this.userService.users;
   }
 }
