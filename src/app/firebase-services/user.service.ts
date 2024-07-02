@@ -19,12 +19,6 @@ export class UserService {
 
   constructor() {
     this.unsubUsers = this.subUserList();
-    
-    /* if (this.users.length === 0) {
-      console.log('All USERS EMPTY:');
-    } else {
-      console.log('All USERS:' + JSON.stringify(this.users));
-    } */
   }
 
   ngonDestroy() {
@@ -36,6 +30,7 @@ export class UserService {
       this.users = [];
       list.forEach((user) => {
         this.users.push(this.setUserObject(user.data(), user.id));
+        console.log(user.id);
       });
     });
   }
@@ -46,6 +41,7 @@ export class UserService {
       firstName: obj.firstName,
       lastName: obj.lastName,
       birthdate: obj.birthdate,
+      email: obj.email,
       street: obj.street,
       zipCode: obj.street,
       city: obj.street,

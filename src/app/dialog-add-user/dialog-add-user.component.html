@@ -8,7 +8,7 @@
         <input
           [disabled]="loading"
           matInput
-          placeholder="Placeholder"
+          placeholder="First Name"
           [(ngModel)]="firstName"
         />
       </mat-form-field>
@@ -17,7 +17,7 @@
         <input
           [disabled]="loading"
           matInput
-          placeholder="Placeholder"
+          placeholder="Last Name"
           [(ngModel)]="lastName"
         />
       </mat-form-field>
@@ -28,7 +28,7 @@
       <input
         [disabled]="loading"
         matInput
-        placeholder="Placeholder"
+        placeholder="Birth Date"
         [matDatepicker]="picker"
         [(ngModel)]="birthdate"
       />
@@ -40,11 +40,21 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
+      <mat-label>E-Mail</mat-label>
+      <input
+        [disabled]="loading"
+        matInput
+        placeholder="E-Mail"
+        [(ngModel)]="email"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
       <mat-label>Street & House No.</mat-label>
       <input
         [disabled]="loading"
         matInput
-        placeholder="Placeholder"
+        placeholder="Street & House No."
         [(ngModel)]="street"
       />
     </mat-form-field>
@@ -55,7 +65,7 @@
         <input
           [disabled]="loading"
           matInput
-          placeholder="Placeholder"
+          placeholder="ZIP Code"
           [(ngModel)]="zipCode"
         />
       </mat-form-field>
@@ -64,14 +74,16 @@
         <input
           [disabled]="loading"
           matInput
-          placeholder="Placeholder"
+          placeholder="City"
           [(ngModel)]="city"
         />
       </mat-form-field>
     </div>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button [disabled]="loading" mat-button>Cancel</button>
+    <button [disabled]="loading" mat-button (click)="dialogRef.close()">
+      Cancel
+    </button>
     <button
       [disabled]="loading"
       mat-button

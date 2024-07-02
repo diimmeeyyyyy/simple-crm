@@ -3,6 +3,7 @@ export interface User {
   firstName: string;
   lastName: string;
   birthdate?: number;
+  email: string;
   street: string;
   zipCode: string;
   city: number;

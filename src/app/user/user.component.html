@@ -4,15 +4,15 @@
     <thead>
       <th>Lastname</th>
       <th>Firstname</th>
-      <th>Birthdate</th>
+      <th>E-Mail</th>
       <th>Address</th>
     </thead>
     <tbody>
       @for (user of getUsers(); track $index) {
-      <tr>
+      <tr [routerLink]="['/user/' + user.id]">
         <td>{{ user.lastName }}</td>
         <td>{{ user.firstName }}</td>
-        <td>{{ user.birthdate }}</td>
+        <td>{{ user.email }}</td>
         <td>{{ user.street }},{{ user.zipCode }},{{ user.city }}</td>
       </tr>
       }
