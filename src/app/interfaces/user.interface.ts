@@ -5,6 +5,6 @@ export interface User {
   birthdate?: number;
   email: string;
   street: string;
-  zipCode: string;
-  city: number;
+  zipCode: number;
+  city: string;
 }

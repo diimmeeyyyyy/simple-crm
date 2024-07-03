@@ -58,6 +58,7 @@ export class DialogAddUserComponent {
       zipCode: this.zipCode,
       city: this.city,
     };
+    debugger;
     this.userService.addUser(user);
     this.clearInputfields();
     this.loading = false;

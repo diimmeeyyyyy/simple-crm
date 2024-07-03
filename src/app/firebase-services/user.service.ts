@@ -43,8 +43,8 @@ export class UserService {
       birthdate: obj.birthdate,
       email: obj.email,
       street: obj.street,
-      zipCode: obj.street,
-      city: obj.street,
+      zipCode: obj.zipCode,
+      city: obj.city,
     };
   }
 
