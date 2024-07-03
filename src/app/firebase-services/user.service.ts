@@ -5,6 +5,8 @@ import {
   doc,
   onSnapshot,
   addDoc,
+  getDoc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { User } from '../interfaces/user.interface';
 
@@ -61,5 +63,27 @@ FUNCTION TO USE
 ==================*/
   async addUser(user: {}) {
     await addDoc(this.getUsersRef(), user);
+  }
+
+  /* async updateUser(docId: string, item: {}) {
+    await updateDoc(this.getSingleUserRef('users', docId)).catch((err) => {
+      console.log(err);
+    });
+  } */
+
+  async getUserById(userId: string): Promise<User | null> {
+    try {
+      const userRef = this.getSingleUserRef('users', userId);
+      const userSnap = await getDoc(userRef);
+      if (userSnap.exists()) {
+        return this.setUserObject(userSnap.data(), userSnap.id);
+      } else {
+        console.log('No such user found');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error when loading user data:', error);
+      return null;
+    }
   }
 }

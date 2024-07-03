@@ -15,24 +15,27 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrl: './user-details.component.scss',
 })
 export class UserDetailsComponent implements OnInit {
+  user: any = {};
   userId: string | null = null;
-  selectedUser: User | undefined;
+  /*  selectedUser: User | undefined; */
 
   constructor(public userService: UserService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.userId = this.route.snapshot.paramMap.get('id');
-    if (this.userId) {
-      const user = this.userService.users.find(
-        (user) => user.id === this.userId
-      );
-
-      if (user) {
-        this.selectedUser = user;
-        /* console.log('USER ist ' + JSON.stringify(this.selectedUser)); */
-      } else {
-        console.error('User nicht gefunden');
+    this.route.paramMap.subscribe((paramMap) => {
+      this.userId = paramMap.get('id');
+      if (this.userId) {
+        this.getUser(this.userId);
       }
+    });
+  }
+
+  async getUser(userId: string) {
+    this.user = await this.userService.getUserById(userId);
+    if (!this.user) {
+      console.error('User nicht gefunden');
+    } else {
+      console.log('RETRIEVED USER', this.user);
     }
   }
 
