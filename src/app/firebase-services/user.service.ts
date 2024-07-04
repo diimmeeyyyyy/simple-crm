@@ -58,7 +58,7 @@ export class UserService {
     return doc(collection(this.firestore, colId), docId);
   }
 
-  /* =================
+/* =================
 FUNCTION TO USE 
 ==================*/
   async addUser(user: {}) {
@@ -74,9 +74,9 @@ FUNCTION TO USE
   async getUserById(userId: string): Promise<User | null> {
     try {
       const userRef = this.getSingleUserRef('users', userId);
-      const userSnap = await getDoc(userRef);
-      if (userSnap.exists()) {
-        return this.setUserObject(userSnap.data(), userSnap.id);
+      const user = await getDoc(userRef);
+      if (user.exists()) {
+        return this.setUserObject(user.data(), user.id);
       } else {
         console.log('No such user found');
         return null;

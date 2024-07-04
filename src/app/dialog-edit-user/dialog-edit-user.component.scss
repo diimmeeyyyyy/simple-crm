@@ -1,0 +1,14 @@
+mat-dialog-content div {
+    padding-block: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .dialog-container {
+    max-width: 500px;
+    position: relative;
+  }

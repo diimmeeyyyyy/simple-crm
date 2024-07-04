@@ -6,6 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from '../../interfaces/user.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogEditUserComponent } from '../../dialog-edit-user/dialog-edit-user.component';
+import { DialogEditAddressComponent } from '../../dialog-edit-address/dialog-edit-address.component';
 
 @Component({
   selector: 'app-user-details',
@@ -17,9 +20,12 @@ import { MatMenuModule } from '@angular/material/menu';
 export class UserDetailsComponent implements OnInit {
   user: any = {};
   userId: string | null = null;
-  /*  selectedUser: User | undefined; */
 
-  constructor(public userService: UserService, private route: ActivatedRoute) {}
+  constructor(
+    public userService: UserService,
+    private route: ActivatedRoute,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap) => {
@@ -39,7 +45,13 @@ export class UserDetailsComponent implements OnInit {
     }
   }
 
-  editUserAddress() {}
+  editUserInfo() {
+    const dialog = this.dialog.open(DialogEditUserComponent);
+    dialog.componentInstance.user = this.user;
+  }
 
-  editUserInfo() {}
+  editUserAddress() {
+    const dialog = this.dialog.open(DialogEditAddressComponent);
+    dialog.componentInstance.user = this.user;
+  }
 }
