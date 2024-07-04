@@ -30,7 +30,8 @@
         matInput
         placeholder="Birth Date"
         [matDatepicker]="picker"
-        [(ngModel)]="user.birthdate"
+        [(ngModel)]="birthdateAsDate"
+        (dateChange)="onDateChange($event.value)"
       />
       <mat-datepicker-toggle
         matIconSuffix

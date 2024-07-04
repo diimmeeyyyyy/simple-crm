@@ -45,6 +45,11 @@ export class UserDetailsComponent implements OnInit {
     }
   }
 
+  formatBirthdate(milliseconds:number){
+    const date = new Date(milliseconds);
+    return date.toLocaleDateString('en-US');
+  }
+
   editUserInfo() {
     const dialog = this.dialog.open(DialogEditUserComponent);
     dialog.componentInstance.user = this.user;

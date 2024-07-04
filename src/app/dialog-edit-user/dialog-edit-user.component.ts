@@ -36,35 +36,21 @@ import { MatNativeDateModule } from '@angular/material/core';
 export class DialogEditUserComponent{
   loading: boolean = false;
   user!: User;
-  /* formattedBirthdate!: any; */
+  birthdateAsDate!: Date;
 
   constructor(
     private userService: UserService,
     public dialogRef: MatDialogRef<DialogEditUserComponent>
   ) {}
 
-  /* ngOnInit() {
-    this.updateFormattedBirthdate();
-  }
-
-  updateFormattedBirthdate() {
-    if (this.user.birthdate) {
-      this.formattedBirthdate = this.getUserBirthdate(); // Nutzt Ihre vorhandene Funktion
+  ngOnInit() {
+    if (typeof this.user.birthdate === 'number') {
+      this.birthdateAsDate = new Date(this.user.birthdate);
     }
   }
 
-  getUserBirthdate() {
-    const timestamp: number | undefined = this.user.birthdate;
-    if (timestamp) {
-      const date: Date = new Date(timestamp * 1000);
-
-      const year: number = date.getUTCFullYear();
-      const month: string = ('0' + (date.getUTCMonth() + 1)).slice(-2);
-      const day: string = ('0' + date.getUTCDate()).slice(-2);
-      const formattedDate: string = `${month}/${day}/${year}`;
-      return formattedDate;
-    } else {
-      return console.error('not found');
-    }
-  } */
+  onDateChange(newDate: Date) {
+    this.birthdateAsDate = newDate; 
+    this.user.birthdate = newDate.getTime();
+  }
 }
