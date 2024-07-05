@@ -33,10 +33,11 @@ import { MatNativeDateModule } from '@angular/material/core';
   templateUrl: './dialog-edit-user.component.html',
   styleUrl: './dialog-edit-user.component.scss',
 })
-export class DialogEditUserComponent{
+export class DialogEditUserComponent {
   loading: boolean = false;
   user!: User;
   birthdateAsDate!: Date;
+  userId!: string | null;
 
   constructor(
     private userService: UserService,
@@ -50,7 +51,14 @@ export class DialogEditUserComponent{
   }
 
   onDateChange(newDate: Date) {
-    this.birthdateAsDate = newDate; 
+    this.birthdateAsDate = newDate;
     this.user.birthdate = newDate.getTime();
+  }
+
+  async saveUser() {
+    this.loading = true;
+    await this.userService.updateUser(this.user);
+    this.loading = false;
+    this.dialogRef.close();
   }
 }

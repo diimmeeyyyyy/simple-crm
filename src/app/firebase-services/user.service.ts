@@ -58,18 +58,34 @@ export class UserService {
     return doc(collection(this.firestore, colId), docId);
   }
 
-/* =================
+  /* =================
 FUNCTION TO USE 
 ==================*/
   async addUser(user: {}) {
     await addDoc(this.getUsersRef(), user);
   }
 
-  /* async updateUser(docId: string, item: {}) {
-    await updateDoc(this.getSingleUserRef('users', docId)).catch((err) => {
-      console.log(err);
-    });
-  } */
+  async updateUser(user: User) {
+    if (user.id) {
+      let docRef = this.getSingleUserRef('users', user.id);
+      let userJSON = this.getCleanJSON(user);
+      await updateDoc(docRef, userJSON).catch((err) => {
+        console.log(err);
+      });
+    }
+  }
+
+  getCleanJSON(user: User): {} {
+    return {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      birthdate: user.birthdate,
+      email: user.email,
+      street: user.street,
+      zipCode: user.zipCode,
+      city: user.city,
+    };
+  }
 
   async getUserById(userId: string): Promise<User | null> {
     try {

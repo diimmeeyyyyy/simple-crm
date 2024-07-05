@@ -50,4 +50,17 @@
       />
     </mat-form-field>
   </mat-dialog-content>
+  <mat-dialog-actions>
+    <button [disabled]="loading" mat-button (click)="dialogRef.close()">
+      Cancel
+    </button>
+    <button
+      [disabled]="loading"
+      mat-button
+      cdkFocusInitial
+      (click)="saveUser()"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
 </main>
